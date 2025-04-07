@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { Search, X, CircleX, CircleCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
@@ -18,9 +18,14 @@ function Tasks({ tasks, onTaskClick, onDeleteClick }) {
         <li key={task.id} className="flex">
           <button
             onClick={() => onTaskClick(task.id)}
-            className={`w-full bg-amber-300 text-amber-50 text-center m-2 p-5 rounded-md 
-                ${task.isCompleted && "line-through"}`}
+            className={`w-full bg-amber-300 text-amber-50 m-2 p-5 rounded-md flex items-center gap-2`}
           >
+            {(!task.isCompleted && (
+              <CircleX className="text-red-500"></CircleX>
+            )) ||
+              (task.isCompleted && (
+                <CircleCheck className="text-green-500"></CircleCheck>
+              ))}
             {task.title}
           </button>
           <Button onClick={() => seeDetailsClick(task)}>
